@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="OralExamManager.Views.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Oral Exam Manager"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1F1F1F}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Oral Exam Manager" 
+                       FontSize="32" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                <Label Text="Manage your oral examinations efficiently" 
+                       FontSize="16" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+            </VerticalStackLayout>
+
+            <!-- Exam Selection -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Select Exam" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <Picker x:Name="ExamPicker" 
+                            Title="Choose an exam"
+                            SelectedItem="{Binding SelectedExam}"
+                            ItemDisplayBinding="{Binding CourseName}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:Object}">
+                                <x:Static Member="{x:Null}" />
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Button Text="Refresh Exams" 
+                            Command="{Binding LoadExamsCommand}"
+                            BackgroundColor="#007ACC"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="45"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Actions" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <Button Text="Create New Exam" 
+                            Command="{Binding CreateExamCommand}"
+                            BackgroundColor="#28A745"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            FontAttributes="Bold"/>
+                    
+                    <Button Text="Add Students" 
+                            Command="{Binding AddStudentsCommand}"
+                            BackgroundColor="#FFC107"
+                            TextColor="Black"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            FontAttributes="Bold"/>
+                    
+                    <Button Text="Start Exam" 
+                            Command="{Binding StartExamCommand}"
+                            BackgroundColor="#DC3545"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            FontAttributes="Bold"/>
+                    
+                    <Button Text="View History" 
+                            Command="{Binding ViewHistoryCommand}"
+                            BackgroundColor="#6F42C1"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Exam List -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Recent Exams" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <CollectionView ItemsSource="{Binding Exams}" 
+                                   SelectionMode="Single"
+                                   SelectedItem="{Binding SelectedExam}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}" 
+                                       CornerRadius="8" 
+                                       Padding="15" 
+                                       Margin="0,5">
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                            <Label Text="{Binding CourseName}" 
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                                            <Label Text="{Binding ExamTerm}" 
+                                                   FontSize="14"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" 
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout Grid.Column="1" 
+                                                             HorizontalOptions="End" 
+                                                             VerticalOptions="Center">
+                                            <Label Text="{Binding IsCompleted, StringFormat='Status: {0}'}" 
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage> 

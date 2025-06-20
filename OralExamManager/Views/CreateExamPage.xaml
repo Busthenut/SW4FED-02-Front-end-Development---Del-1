@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="OralExamManager.Views.CreateExamPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Create Exam"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1F1F1F}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Create New Exam" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                <Label Text="Enter exam details below" 
+                       FontSize="16" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+            </VerticalStackLayout>
+
+            <!-- Form -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="20">
+                    
+                    <!-- Exam Term -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Exam Term *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <Entry Text="{Binding ExamTerm}" 
+                               Placeholder="e.g., Summer 25"
+                               BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Course Name -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Course Name *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <Entry Text="{Binding CourseName}" 
+                               Placeholder="e.g., Advanced Programming"
+                               BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Date -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Date *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <DatePicker Date="{Binding Date}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Number of Questions -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Number of Questions *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <Entry Text="{Binding NumberOfQuestions}" 
+                               Placeholder="10"
+                               Keyboard="Numeric"
+                               BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Examination Time -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Examination Time (minutes) *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <Entry Text="{Binding ExaminationTimeMinutes}" 
+                               Placeholder="15"
+                               Keyboard="Numeric"
+                               BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Start Time -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Start Time *" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        <TimePicker Time="{Binding StartTime}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Fill">
+                <Button Text="Cancel" 
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="#6C757D"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+                
+                <Button Text="Create Exam" 
+                        Command="{Binding SaveExamCommand}"
+                        BackgroundColor="#28A745"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage> 

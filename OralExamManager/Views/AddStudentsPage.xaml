@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="OralExamManager.Views.AddStudentsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Add Students"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1F1F1F}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Add Students" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                <Label Text="Add students in examination order" 
+                       FontSize="16" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+            </VerticalStackLayout>
+
+            <!-- Add Student Form -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Add New Student" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Student ID *" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Entry Text="{Binding StudentId}" 
+                                   Placeholder="e.g., 12345"
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                        
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Student Name *" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Entry Text="{Binding StudentName}" 
+                                   Placeholder="e.g., John Doe"
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                    
+                    <Button Text="Add Student" 
+                            Command="{Binding AddStudentCommand}"
+                            BackgroundColor="#28A745"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="45"
+                            FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Students List -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Students ({Binding Students.Count})" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <CollectionView ItemsSource="{Binding Students}" 
+                                   HeightRequest="300">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}" 
+                                       CornerRadius="8" 
+                                       Padding="15" 
+                                       Margin="0,5">
+                                    <Grid ColumnDefinitions="Auto, *, Auto">
+                                        <Label Grid.Column="0" 
+                                               Text="{Binding Order, StringFormat='{0}.'}" 
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               Margin="0,0,10,0"
+                                               TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                                        
+                                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                            <Label Text="{Binding Name}" 
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                                            <Label Text="{Binding StudentId}" 
+                                                   FontSize="14"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                        </VerticalStackLayout>
+                                        
+                                        <Button Grid.Column="2" 
+                                                Text="Remove" 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveStudentCommand}"
+                                                CommandParameter="{Binding}"
+                                                BackgroundColor="#DC3545"
+                                                TextColor="White"
+                                                CornerRadius="5"
+                                                HeightRequest="35"
+                                                WidthRequest="80"
+                                                FontSize="12"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Fill">
+                <Button Text="Cancel" 
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="#6C757D"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+                
+                <Button Text="Save" 
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#28A745"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage> 

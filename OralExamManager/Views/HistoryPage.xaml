@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="OralExamManager.Views.HistoryPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Exam History"
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1F1F1F}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Exam History" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                <Label Text="{Binding Exam.CourseName}" 
+                       FontSize="18" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+            </VerticalStackLayout>
+
+            <!-- Exam Summary -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Exam Summary" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Term" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Label Text="{Binding Exam.ExamTerm}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   Padding="10"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                        
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Date" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Label Text="{Binding Exam.Date, StringFormat='{0:dd/MM/yyyy}'}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   Padding="10"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                    
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Questions" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Label Text="{Binding Exam.NumberOfQuestions}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   Padding="10"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                        
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Time Limit" 
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                            <Label Text="{Binding Exam.ExaminationTimeMinutes, StringFormat='{0} min'}" 
+                                   BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}"
+                                   Padding="10"
+                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Average Grade -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Label Text="Class Average" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <Label Text="{Binding AverageGrade, StringFormat='{0:F1}'}" 
+                           FontSize="48" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#28A745"/>
+                    
+                    <Label Text="out of 5" 
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Results List -->
+            <Frame BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#2D2D2D}" 
+                   CornerRadius="10" 
+                   Padding="20" 
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Student Results" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                    
+                    <CollectionView ItemsSource="{Binding Results}" 
+                                   HeightRequest="400">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#3D3D3D}" 
+                                       CornerRadius="8" 
+                                       Padding="15" 
+                                       Margin="0,5">
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                            <Label Text="{Binding StudentName}" 
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#2E2E2E, Dark=#FFFFFF}"/>
+                                            <Label Text="{Binding StudentId}" 
+                                                   FontSize="14"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                            <Label Text="{Binding QuestionNumber, StringFormat='Question: {0}'}" 
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                            <Label Text="{Binding ActualExaminationTime, StringFormat='Time: {0:mm\\:ss}'}" 
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"/>
+                                            <Label Text="{Binding Notes}" 
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                        
+                                        <VerticalStackLayout Grid.Column="1" 
+                                                             HorizontalOptions="End" 
+                                                             VerticalOptions="Center">
+                                            <Label Text="{Binding Grade, StringFormat='Grade: {0}'}" 
+                                                   FontSize="18"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#28A745"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Fill">
+                <Button Text="Refresh" 
+                        Command="{Binding LoadHistoryCommand}"
+                        BackgroundColor="#007ACC"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+                
+                <Button Text="Back" 
+                        Command="{Binding BackCommand}"
+                        BackgroundColor="#6C757D"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage> 
